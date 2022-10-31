@@ -150,3 +150,5 @@ arrayFilterFunction.forEach((element) =>
     `-> ${element.title} \n   ${element.price} \n   ${element.rating.count}\n   --------------`
   )
 );
+
+//callback --> 137 pro; 145 product; 148 element;
