@@ -1,13 +1,9 @@
 const divCard = document.querySelector(".card");
 const buttonOther = document.createElement("button");
 buttonOther.textContent = "Show more";
-// const divNode = document.createElement("div");
-// divNode.className = "divCard";
-
 const idDivNode = document.createElement("div");
-idDivNode.className = "idDiv";
-
 const adviceDivNode = document.createElement("div");
+idDivNode.className = "idDiv";
 adviceDivNode.className = "adviceDiv";
 
 //Immagine
@@ -19,14 +15,13 @@ imgNode.classList.add("dividerD");
 const imgButtonNode = document.createElement("img");
 imgButtonNode.setAttribute("src", "./images/icon-dice.svg");
 imgButtonNode.classList.add("iconD");
-
+const idNode = document.createElement("h2");
+const adviceNode = document.createElement("p");
 //-------card--------
 const createCard = (id, advice) => {
-  const idNode = document.createElement("h2");
   idNode.textContent = `ADVICE # ${id}`;
   idNode.classList.add("id");
 
-  const adviceNode = document.createElement("p");
   adviceNode.textContent = '"' + advice + '"';
   adviceNode.classList.add("advice");
 
