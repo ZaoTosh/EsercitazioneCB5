@@ -9,6 +9,17 @@ idDivNode.className = "idDiv";
 
 const adviceDivNode = document.createElement("div");
 adviceDivNode.className = "adviceDiv";
+
+//Immagine
+const imgNode = document.createElement("img");
+imgNode.setAttribute("src", "./images/pattern-divider-desktop.svg");
+imgNode.classList.add("dividerD");
+
+//Immagine
+const imgButtonNode = document.createElement("img");
+imgButtonNode.setAttribute("src", "./images/icon-dice.svg");
+imgButtonNode.classList.add("iconD");
+
 //-------card--------
 const createCard = (id, advice) => {
   const idNode = document.createElement("h2");
@@ -22,7 +33,7 @@ const createCard = (id, advice) => {
   idDivNode.append(idNode);
   adviceDivNode.append(adviceNode);
   //divNode.appendChild(idDivNode, adviceDivNode, buttonOther);
-  divCard.append(idDivNode, adviceDivNode, buttonOther);
+  divCard.append(idDivNode, adviceDivNode, imgNode, imgButtonNode);
 };
 // bottone
 
@@ -31,7 +42,7 @@ const urlAdvice = "https://api.adviceslip.com/advice";
 /**
  * Get data from the end point
  *
- * @param {string} url
+ * @param {string} URL
  */
 const getAdvice = (URL) => {
   fetch(URL, { cache: "no-cache" })
@@ -41,15 +52,10 @@ const getAdvice = (URL) => {
       createCard(res.slip.id, res.slip.advice);
     });
 };
-
-buttonOther.addEventListener("click", () => {
+const onFirstLoad = () => {
+  imgButtonNode.addEventListener("click", () => {
+    getAdvice(urlAdvice);
+  });
   getAdvice(urlAdvice);
-});
-getAdvice(urlAdvice);
-
-// {
-//   "slip": {
-//     "id": 203,
-//     "advice": "The best sex is fun."
-//   }
-// }
+};
+window.onload = onFirstLoad;
