@@ -1,10 +1,34 @@
 const divCard = document.querySelector(".card");
 const divButton = document.querySelector(".buttonPoke");
-const divButton2 = document.querySelector(".buttonPoke2");
+
 const insertNum = (n) => {
   if (n > 9 && n < 100) return `#0${n}`;
   if (n <= 9) return `#00${n}`;
   return `#${n}`;
+};
+
+const ctrlNextShowMore = (next) => {
+  if (next >= 150) button.disabled = true;
+};
+
+const promiseFunction = (arrRespPoke) => {
+  //Promessa ricezione pacchetto
+  Promise.all(arrRespPoke).then((res) =>
+    res.map((jsonPokemon) =>
+      createCard(
+        jsonPokemon.sprites.other.dream_world.front_default,
+        jsonPokemon.id,
+        jsonPokemon.name,
+        jsonPokemon.types[0].type.name
+      )
+    )
+  );
+};
+
+const fetchFunction = (arrRequest) => {
+  // invio della richiesta al server
+  const prom = arrRequest.map((res) => fetch(res).then((resp) => resp.json()));
+  return prom;
 };
 //-------card--------
 const createCard = (image, num, namePoke, typePoke) => {
@@ -29,78 +53,22 @@ const createCard = (image, num, namePoke, typePoke) => {
   divCard.append(cardNode);
 };
 // bottone
-const buttonOther = document.createElement("button");
-buttonOther.textContent = "Show more";
-const buttonOther2 = document.createElement("button");
-buttonOther2.textContent = "Other";
-buttonOther.addEventListener("click", PromisePoke2);
-buttonOther2.addEventListener("click", PromisePoke3);
-divButton.append(buttonOther);
+const button = document.createElement("button");
+button.textContent = "Show more";
+divButton.append(button);
 
 // Array di richieste
-let i = 1;
-const arrRequest = [];
-const arrRequest2 = [];
-const arrRequest3 = [];
-for (let i = 1; i <= 50; i++) {
-  arrRequest.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
-}
-// invio della richiesta al server
-let arrRespPoke = arrRequest.map((res) =>
-  fetch(res).then((resp) => resp.json())
-);
+let nextShowMore = 0;
+const fetchCardPoke = () => {
+  const arrRequest = [];
 
-//Promessa ricezione pacchetto
-Promise.all(arrRespPoke).then((res) =>
-  res.map((jsonPokemon) =>
-    createCard(
-      jsonPokemon.sprites.other.dream_world.front_default,
-      jsonPokemon.id,
-      jsonPokemon.name,
-      jsonPokemon.types[0].type.name
-    )
-  )
-);
-async function PromisePoke2() {
-  // const PromisePoke22 = async () => {
-  //Promessa ricezione pacchetto
-
-  for (let i = 51; i <= 100; i++)
-    arrRequest2.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
-  let arrRespPoke2 = arrRequest2.map((res) =>
-    fetch(res).then((resp) => resp.json())
-  );
-
-  Promise.all(arrRespPoke2).then((res) =>
-    res.map((jsonPokemon) =>
-      createCard(
-        jsonPokemon.sprites.other.dream_world.front_default,
-        jsonPokemon.id,
-        jsonPokemon.name,
-        jsonPokemon.types[0].type.name
-      )
-    )
-  );
-  buttonOther.disabled = true;
-  divButton2.append(buttonOther2);
-}
-
-function PromisePoke3() {
-  for (let i = 101; i <= 150; i++)
-    arrRequest3.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
-  let arrRespPoke3 = arrRequest3.map((res) =>
-    fetch(res).then((resp) => resp.json())
-  );
-  //Promessa ricezione pacchetto
-  Promise.all(arrRespPoke3).then((res) =>
-    res.map((jsonPokemon) =>
-      createCard(
-        jsonPokemon.sprites.other.dream_world.front_default,
-        jsonPokemon.id,
-        jsonPokemon.name,
-        jsonPokemon.types[0].type.name
-      )
-    )
-  );
-  buttonOther2.disabled = true;
-}
+  for (let i = 1; i <= 50; i++) {
+    arrRequest.push(`https://pokeapi.co/api/v2/pokemon/${i + nextShowMore}`);
+  }
+  const arrRespPoke = fetchFunction(arrRequest);
+  promiseFunction(arrRespPoke);
+  nextShowMore += 50;
+  ctrlNextShowMore(nextShowMore);
+};
+window.onload = fetchCardPoke;
+button.addEventListener("click", fetchCardPoke);
