@@ -38,7 +38,7 @@ const promiseFunction = (arrRespPoke) => {
 const fetchFunction = async (URL) => {
   // invio della richiesta al server
   const prom = await fetch(URL).then((resp) => resp.json());
-  console.log(prom);
+
   return prom;
 };
 
@@ -86,3 +86,95 @@ const fetchPreviusCardPoke = () => {
 window.onload = fetchNextCardPoke;
 buttonNext.addEventListener("click", fetchNextCardPoke);
 buttonPrevius.addEventListener("click", fetchPreviusCardPoke);
+
+//---------Avanzato---------
+
+let ctrlButton = true;
+const divPost = document.querySelector(".post");
+let lastElement = divPost;
+
+const createPost = (data) => {
+  const divTib = document.querySelector(".tib");
+  const divId = document.createElement("div");
+  const divTitle = document.createElement("div");
+  const divBody = document.createElement("div");
+  const id = document.createElement("h2");
+  const title = document.createElement("h1");
+  const body = document.createElement("p");
+  id.classList.add("id");
+  title.classList.add("title");
+  body.classList.add("body1");
+
+  id.textContent = data.id;
+  title.textContent = data.title[0].toUpperCase() + data.title.slice(1);
+  body.textContent = data.body[0].toUpperCase() + data.body.slice(1);
+  divId.append(id);
+  divTitle.append(title);
+  divBody.append(body);
+  divPost.append(divId, divTitle, divBody);
+};
+let start = 1;
+let limit = 0;
+let crosser = 10;
+const callback = (array) => {
+  array.forEach((card) => {
+    if (card.isIntersecting) {
+      if (limit < 90) {
+        populateCards(crosser);
+      } else if (ctrlButton) {
+        showMorePost();
+        ctrlButton = false;
+      }
+    }
+  });
+};
+const GET = async (index) => {
+  let response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${index}`
+  );
+  return await response.json();
+};
+
+const populateCards = (num) => {
+  limit += num;
+
+  for (let i = start; i <= limit; i++) {
+    GET(i)
+      .then((res) => createPost(res))
+
+      .finally(() => {
+        observer.unobserve(lastElement);
+        lastElement = document.querySelector(".post").lastElementChild;
+        observer.observe(lastElement);
+      });
+  }
+
+  start += num;
+};
+
+// Creo il mio observer
+const observer = new IntersectionObserver(callback);
+
+// Imposto il mio observer iniziale con il primo elemento visibile al primo download della pagina web.
+observer.observe(lastElement);
+//Bottone per ulteriori 10 post
+const showMorePost = () => {
+  const functionBtn = async () => {
+    for (let i = 91; i <= 100; i++) {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${i}`
+      )
+        .then((resp) => resp.json())
+        .then((res) => createPost(res))
+        .finally(() => {
+          buttonMorePost.disabled = true;
+        });
+    }
+  };
+
+  const buttonMorePost = document.createElement("button");
+  buttonMorePost.classList.add(".buttonMorePost");
+  buttonMorePost.textContent = "Show More";
+  divPost.append(buttonMorePost);
+  buttonMorePost.addEventListener("click", functionBtn);
+};
