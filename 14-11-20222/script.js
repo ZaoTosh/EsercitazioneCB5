@@ -13,16 +13,16 @@ const ctrlPreviusShow = (next) => {
 };
 const promiseFunction = (arrRespPoke) => {
   //Promessa ricezione pacchetto
-  arrRespPoke.then((jsonPost) => createCard(jsonPost));
+  arrRespPoke.then((jsonPost) => createPost(jsonPost));
 };
+const divTib = document.querySelector(".tib");
+const divId = document.createElement("div");
+const divTitle = document.createElement("div");
+const divBody = document.createElement("div");
+const id = document.createElement("h2");
+const title = document.createElement("h1");
+const body = document.createElement("p");
 const createPost = (data) => {
-  const divTib = document.querySelector(".tib");
-  const divId = document.createElement("div");
-  const divTitle = document.createElement("div");
-  const divBody = document.createElement("div");
-  const id = document.createElement("h2");
-  const title = document.createElement("h1");
-  const body = document.createElement("p");
   id.classList.add("id");
   title.classList.add("title");
   body.classList.add("body1");
@@ -39,6 +39,7 @@ const fetchFunction = async (URL) => {
   const prom = await fetch(URL).then((resp) => resp.json());
   return prom;
 }; // bottoni
+//
 const buttonNext = document.createElement("button");
 buttonNext.textContent = ">";
 const buttonPrevius = document.createElement("button");
@@ -48,7 +49,7 @@ divButton.append(buttonNext);
 let actualPost = 0;
 const fetchNext = () => {
   actualPost++;
-  const URL = `https://pokeapi.co/api/v2/pokemon/${actualPost}`;
+  const URL = `https://jsonplaceholder.typicode.com/posts/${actualPost}`;
   const arrResp = fetchFunction(URL);
   promiseFunction(arrResp);
   ctrlNextShow(actualPost);
@@ -56,7 +57,7 @@ const fetchNext = () => {
 const fetchPrevius = () => {
   ctrlPreviusShow(actualPost);
   actualPost--;
-  const URL = `https://pokeapi.co/api/v2/pokemon/${actualPost}`;
+  const URL = `https://jsonplaceholder.typicode.com/posts/${actualPost}`;
   const arrResp = fetchFunction(URL);
   promiseFunction(arrResp);
 };
