@@ -13,6 +13,7 @@ const ctrlPreviusShow = (next) => {
 };
 const promiseFunction = (arrRespPoke) => {
   //
+  //
   //Promessa ricezione pacchetto
   arrRespPoke.then((jsonPost) => createPost(jsonPost));
 };
