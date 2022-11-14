@@ -12,6 +12,7 @@ const ctrlPreviusShow = (next) => {
   buttonNext.disabled = false;
 };
 const promiseFunction = (arrRespPoke) => {
+  //
   //Promessa ricezione pacchetto
   arrRespPoke.then((jsonPost) => createPost(jsonPost));
 };
