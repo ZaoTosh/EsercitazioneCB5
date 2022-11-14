@@ -39,6 +39,7 @@ const fetchFunction = async (URL) => {
   const prom = await fetch(URL).then((resp) => resp.json());
   return prom;
 }; // bottoni
+//
 const buttonNext = document.createElement("button");
 buttonNext.textContent = ">";
 const buttonPrevius = document.createElement("button");
