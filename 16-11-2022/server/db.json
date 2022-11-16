@@ -1,9 +1,24 @@
 {
   "pokemon": [
     {
-      "id": "ed94a8c3-cce3-4e7c-9fa1-913d10a0b3a2",
-      "name": "pippo",
-      "type": "ciao"
+      "id": 1,
+      "name": "dwd",
+      "type": "wdw"
+    },
+    {
+      "id": 3,
+      "name": "as",
+      "type": "as"
+    },
+    {
+      "id": 4,
+      "name": "asw",
+      "type": "asw"
+    },
+    {
+      "id": 5,
+      "name": "asq",
+      "type": "asq"
     }
   ]
 }

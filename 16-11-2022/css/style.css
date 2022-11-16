@@ -85,6 +85,12 @@ h3 {
   border: 2px solid lightslategray;
 }
 
+p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .electric {
   background: repeating-linear-gradient(135deg, #ccc8b2, #fcf7de 50%);
 }

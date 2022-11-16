@@ -4,9 +4,11 @@ const GET = async (URL) => {
 };
 const getId = async (URL) => {
   let max = 1;
-  const response = await fetch(URL);
-  const resp = await response.json();
-  arrId = resp.map((res) => res.id);
+  const response = GET(URL);
+  console.log("response" + response);
+  const resp = response.this((res) => res.id);
+  console.log("resp" + resp);
+  const arrId = parseInt(Object.values(resp));
   max = Math.max(arrId);
   return max;
 };
@@ -27,4 +29,4 @@ const DELETE = async (URL, id) => {
   });
 };
 
-export { GET, POST, DELETE };
+export { GET, POST, DELETE, getId };

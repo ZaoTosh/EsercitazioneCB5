@@ -1,8 +1,8 @@
-import { DELETE, GET, getId } from "./api.js";
+import { GET, POST, DELETE, getId } from "./api.js";
 
 const c = (el) => document.createElement(el);
 const q = (el) => document.querySelector(el);
-const cardD = document.querySelector(".card__all");
+
 // API
 /**
  * Create an unique hash code
@@ -13,26 +13,30 @@ function idIncrements(url) {
   console.log("incremento id: " + id);
   return id;
 }
-
+let i = 1;
 const createCard = (url, parent, name, type, id) => {
+  i++;
   const wrapperEl = c("li");
   const cardEl = c("div");
+  const img = document.createElement("img");
+  img.classList.add("card__all__img");
+  img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
+  const idEl = c("p");
   const nameEl = c("p");
   const typeEl = c("p");
-  const btn = c("button");
+  wrapperEl.classList.add("card__all");
 
-  wrapperEl.className = "list__card";
-
+  idEl.textContent = id;
   nameEl.textContent = name;
   typeEl.textContent = type;
 
-  cardD.addEventListener("click", () => {
+  wrapperEl.addEventListener("click", () => {
     DELETE(url, id).then(() => location.reload());
   });
 
-  cardEl.append(nameEl, typeEl, btn);
+  cardEl.append(img, nameEl, typeEl, idEl);
   wrapperEl.append(cardEl);
-  parent.appendChild(wrapperEl);
+  parent.append(wrapperEl);
 };
 
 export { c, q, idIncrements, createCard };
