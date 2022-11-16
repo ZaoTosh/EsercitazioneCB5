@@ -2,23 +2,23 @@
   "pokemon": [
     {
       "id": 1,
-      "name": "dwd",
-      "type": "wdw"
+      "name": "bulbasaur",
+      "type": "grass"
+    },
+    {
+      "id": 2,
+      "name": "ivysaur",
+      "type": "grass"
     },
     {
       "id": 3,
-      "name": "as",
-      "type": "as"
+      "name": "venusaur",
+      "type": "grass"
     },
     {
       "id": 4,
-      "name": "asw",
-      "type": "asw"
-    },
-    {
-      "id": 5,
-      "name": "asq",
-      "type": "asq"
+      "name": "charmander",
+      "type": "fire"
     }
   ]
 }
