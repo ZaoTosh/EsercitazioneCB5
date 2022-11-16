@@ -62,15 +62,15 @@ h3 {
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  gap: 2px;
+  gap: 10px;
 }
 
 .card__all {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  height: 200px;
+  height: 250px;
   width: 150px;
   border: 2px solid lightgrey;
   border-radius: 6px;
@@ -78,15 +78,27 @@ h3 {
 }
 
 .card__all__img {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
   width: 130px;
   height: 130px;
-  background: gray;
-  border-radius: 6px;
+
+  border-radius: 100%;
   border: 2px solid lightslategray;
 }
 
 p {
   display: flex;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  display: flex;
+  margin: 10px;
   justify-content: center;
   align-items: center;
 }

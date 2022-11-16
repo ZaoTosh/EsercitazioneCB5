@@ -13,6 +13,13 @@ function idIncrements(url) {
   console.log("incremento id: " + id);
   return id;
 }
+
+const insertNum = (n) => {
+  if (n > 9 && n < 100) return `#0${n}`;
+  if (n <= 9) return `#00${n}`;
+  return `#${n}`;
+};
+
 let i = 1;
 const createCard = (url, parent, name, type, id) => {
   i++;
@@ -21,20 +28,21 @@ const createCard = (url, parent, name, type, id) => {
   const img = document.createElement("img");
   img.classList.add("card__all__img");
   img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
+
   const idEl = c("p");
-  const nameEl = c("p");
+  const nameEl = c("h1");
   const typeEl = c("p");
   wrapperEl.classList.add("card__all");
 
-  idEl.textContent = id;
-  nameEl.textContent = name;
-  typeEl.textContent = type;
-
+  idEl.textContent = insertNum(id);
+  nameEl.textContent = name[0].toUpperCase() + name.slice(1);
+  typeEl.textContent = "Type: " + type;
+  wrapperEl.classList.add(type);
   wrapperEl.addEventListener("click", () => {
     DELETE(url, id).then(() => location.reload());
   });
 
-  cardEl.append(img, nameEl, typeEl, idEl);
+  cardEl.append(img, idEl, nameEl, typeEl);
   wrapperEl.append(cardEl);
   parent.append(wrapperEl);
 };
