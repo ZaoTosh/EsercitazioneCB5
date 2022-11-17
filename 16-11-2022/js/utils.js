@@ -20,6 +20,32 @@ const insertNum = (n) => {
   return `#${n}`;
 };
 
+// function getPromisePoke() {
+//   let jsonPokemon = "";
+//   for (let i = 1; i <= 150; i++) {
+//     fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+//       .then((pokemon) => pokemon.json())
+//       .then((res) => res);
+//   }
+// }
+
+// const getPromisePoke = async (namePoke) => {
+//   const response = await fetch("https://pokeapi.co/api/v2/pokemon/1");
+//   const resp = await response.json();
+//   const respo = await resp.then((res) => {
+//     if (namePoke === res.name)
+//       return res.sprites.other.dream_world.front_default;
+//     else "https://picsum.photos/130/130/?1";
+//   });
+// };
+// function getImg(namePoke) {
+//   getPromisePoke().then((res) => {
+//     if (namePoke === res.name)
+//       return res.sprites.other.dream_world.front_default;
+//     else "https://picsum.photos/130/130/?1";
+//   });
+// }
+console.log(getPromisePoke("bulbasaur"));
 let i = 1;
 const createCard = (url, parent, name, type, id) => {
   i++;
@@ -28,7 +54,7 @@ const createCard = (url, parent, name, type, id) => {
   const img = document.createElement("img");
   img.classList.add("card__all__img");
   img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
-
+  //img.setAttribute("src", `${getPromisePoke(name.toLowerCase())}`);
   const idEl = c("p");
   const nameEl = c("h1");
   const typeEl = c("p");
