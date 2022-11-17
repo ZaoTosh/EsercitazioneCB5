@@ -45,7 +45,7 @@ const insertNum = (n) => {
 //     else "https://picsum.photos/130/130/?1";
 //   });
 // }
-console.log(getPromisePoke("bulbasaur"));
+//console.log(getPromisePoke("bulbasaur"));
 let i = 1;
 const createCard = (url, parent, name, type, id) => {
   i++;
