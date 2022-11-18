@@ -45,10 +45,8 @@ GET(BASE_URL).then((data) => {
   inputEl.addEventListener("input", (e) => {
     cardList.replaceChildren();
     inputValue = e.target.value;
-    console.log(inputValue);
-    const filteredByInput = productsList.filter((product) =>
-      product.title.includes(inputValue)
-    );
-    filteredByInput.map((product) => createCardEl(product, cardList));
+    productsList
+      .filter((product) => product.title.includes(inputValue))
+      .map((product) => createCardEl(product, cardList));
   });
 });
