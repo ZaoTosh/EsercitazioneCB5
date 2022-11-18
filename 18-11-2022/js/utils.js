@@ -83,16 +83,22 @@ const createCard = (url, parent, name, type, id) => {
   const nameEl = c("h1");
   const typeEl = c("p");
   wrapperEl.classList.add("card__all");
-
   idEl.textContent = insertNum(id);
   nameEl.textContent = name[0].toUpperCase() + name.slice(1);
   typeEl.textContent = "Type: " + type;
   wrapperEl.classList.add(type);
-  wrapperEl.addEventListener("click", () => {
+  wrapperEl.addEventListener("dblclick", () => {
     DELETE(url, id).then(() => location.reload());
   });
 
-  wrapperEl.addEventListener("dblclick", console.log("funziona"));
+  wrapperEl.addEventListener("click", () => {
+    console.log("funziona");
+    const form = document.forms.pokemonPatch;
+    const elements = form.elements;
+    elements.name.value = name;
+    elements.id.value = id;
+    elements.type.value = type;
+  });
   //  () => {
   //   const data = {
   //     name: elementsFP.name.value,
