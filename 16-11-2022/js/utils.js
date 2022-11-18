@@ -19,15 +19,14 @@ const insertNum = (n) => {
   if (n <= 9) return `#00${n}`;
   return `#${n}`;
 };
-
-// function getPromisePoke() {
-//   let jsonPokemon = "";
-//   for (let i = 1; i <= 150; i++) {
-//     fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
-//       .then((pokemon) => pokemon.json())
-//       .then((res) => res);
-//   }
-// }
+let Arr = [];
+function getPromisePoke() {
+  for (let i = 1; i <= 150; i++) {
+    Arr[i] = fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      .then((pokemon) => pokemon.json())
+      .then((res) => res);
+  }
+}
 
 // const getPromisePoke = async (namePoke) => {
 //   const response = await fetch("https://pokeapi.co/api/v2/pokemon/1");
@@ -46,6 +45,18 @@ const insertNum = (n) => {
 //   });
 // }
 //console.log(getPromisePoke("bulbasaur"));
+const BASE_URL1 = "https://jsonplaceholder.typicode.com/posts";
+// "title": "eum et est occaecati"
+let productsList = [];
+const GET1 = async (BASE_URL) =>
+  await fetch(BASE_URL)
+    .then((res) => res.json())
+    .then((data) => data);
+
+// GET1(BASE_URL1).then((data) => {
+//   productsList = data.filter((product) => product.id <= 10);
+// });
+console.log(productsList);
 let i = 1;
 const createCard = (url, parent, name, type, id) => {
   i++;
@@ -53,8 +64,21 @@ const createCard = (url, parent, name, type, id) => {
   const cardEl = c("div");
   const img = document.createElement("img");
   img.classList.add("card__all__img");
-  img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
+  //img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
   //img.setAttribute("src", `${getPromisePoke(name.toLowerCase())}`);
+  img.setAttribute(
+    "src",
+    toString(() => {
+      for (let i = 1; i <= 150; i++) {
+        GET1(`https://pokeapi.co/api/v2/pokemon/${i}`)
+          .filter((product) => product.name === name)
+          .map((product) => {
+            console.log(product.name);
+            return product.sprites.other.dream_world.front_default;
+          });
+      }
+    })
+  );
   const idEl = c("p");
   const nameEl = c("h1");
   const typeEl = c("p");

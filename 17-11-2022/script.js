@@ -43,6 +43,7 @@ GET(BASE_URL).then((data) => {
   console.log(productsList);
 
   inputEl.addEventListener("input", (e) => {
+    cardList.replaceChildren();
     inputValue = e.target.value;
     console.log(inputValue);
     const filteredByInput = productsList.filter((product) =>
