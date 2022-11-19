@@ -2,7 +2,10 @@ import { GET, POST, DELETE, getId } from "./api.js";
 
 const c = (el) => document.createElement(el);
 const q = (el) => document.querySelector(el);
-
+const searchPoke = document.querySelector(".searchPoke");
+const ul1 = q(".card");
+const url = "http://localhost:3000/pokemon";
+let arrCards = [];
 // API
 /**
  * Create an unique hash code
@@ -20,98 +23,70 @@ const insertNum = (n) => {
   return `#${n}`;
 };
 let Arr = [];
-function getPromisePoke() {
-  for (let i = 1; i <= 150; i++) {
-    Arr[i] = fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
-      .then((pokemon) => pokemon.json())
-      .then((res) => res);
-  }
-}
-
-// const getPromisePoke = async (namePoke) => {
-//   const response = await fetch("https://pokeapi.co/api/v2/pokemon/1");
-//   const resp = await response.json();
-//   const respo = await resp.then((res) => {
-//     if (namePoke === res.name)
-//       return res.sprites.other.dream_world.front_default;
-//     else "https://picsum.photos/130/130/?1";
-//   });
-// };
-// function getImg(namePoke) {
-//   getPromisePoke().then((res) => {
-//     if (namePoke === res.name)
-//       return res.sprites.other.dream_world.front_default;
-//     else "https://picsum.photos/130/130/?1";
-//   });
-// }
-//console.log(getPromisePoke("bulbasaur"));
-const BASE_URL1 = "https://jsonplaceholder.typicode.com/posts";
-// "title": "eum et est occaecati"
-let productsList = [];
-const GET1 = async (BASE_URL) =>
-  await fetch(BASE_URL)
-    .then((res) => res.json())
-    .then((data) => data);
-
-// GET1(BASE_URL1).then((data) => {
-//   productsList = data.filter((product) => product.id <= 10);
-// });
-console.log(productsList);
 let i = 1;
-const createCard = (url, parent, name, type, id) => {
+const createCard = (url, parent, data) => {
   i++;
   const wrapperEl = c("li");
   const cardEl = c("div");
   const img = document.createElement("img");
   img.classList.add("card__all__img");
-  //img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
+  img.setAttribute("src", `https://picsum.photos/130/130/?${i}`);
   //img.setAttribute("src", `${getPromisePoke(name.toLowerCase())}`);
-  img.setAttribute(
-    "src",
-    toString(() => {
-      for (let i = 1; i <= 150; i++) {
-        GET1(`https://pokeapi.co/api/v2/pokemon/${i}`)
-          .filter((product) => product.name === name)
-          .map((product) => {
-            console.log(product.name);
-            return product.sprites.other.dream_world.front_default;
-          });
-      }
-    })
-  );
+  // img.setAttribute("src", () => {
+  //   GET(`https://pokeapi.co/api/v2/pokemon/?limit=150`).then((prod) =>
+  //     prod
+  //       .filter((product) => product.name === data.name)
+  //       .map((product) => {
+  //         console.log(product.name);
+  //         return product.sprites.other.dream_world.front_default;
+  //       })
+  //   );
+  // });
+
   const idEl = c("p");
   const nameEl = c("h1");
   const typeEl = c("p");
   wrapperEl.classList.add("card__all");
-  idEl.textContent = insertNum(id);
-  nameEl.textContent = name[0].toUpperCase() + name.slice(1);
-  typeEl.textContent = "Type: " + type;
-  wrapperEl.classList.add(type);
+  idEl.textContent = insertNum(data.id);
+  nameEl.textContent = data.name[0].toUpperCase() + data.name.slice(1);
+  typeEl.textContent = "Type: " + data.type;
+  wrapperEl.classList.add(data.type);
   wrapperEl.addEventListener("dblclick", () => {
-    DELETE(url, id).then(() => location.reload());
+    DELETE(url, data.id).then(() => location.reload());
   });
 
   wrapperEl.addEventListener("click", () => {
     console.log("funziona");
     const form = document.forms.pokemonPatch;
     const elements = form.elements;
-    elements.name.value = name;
-    elements.id.value = id;
-    elements.type.value = type;
+    elements.name.value = data.name;
+    elements.id.value = data.id;
+    elements.type.value = data.type;
   });
-  //  () => {
-  //   const data = {
-  //     name: elementsFP.name.value,
-  //     type: elementsFP.type.value,
-  //   };
-  //   PATCH(url, id, data)
-  //     .then((res) => res.reload)
-  //     .catch((e) => console.log(e));
-  // });
 
   cardEl.append(img, idEl, nameEl, typeEl);
   wrapperEl.append(cardEl);
   parent.append(wrapperEl);
 };
 
+GET(url).then((data) => {
+  arrCards = [];
+  arrCards = data.map((product) => product);
+  console.log(arrCards);
+});
+const card1 = document.querySelector(".cards");
+
+searchPoke.addEventListener("input", (e) => {
+  let inputValue = e.target.value;
+  let prova = arrCards.filter((prod) => prod.name.includes(inputValue));
+  console.log(prova);
+  ul1.replaceChildren();
+  prova.map((prod) => createCard(url, ul1, prod));
+});
+
+GET(`https://picsum.photos/v2/list`).then((prod) =>
+  prod.map((product) => console.log(product.id))
+);
+
 export { c, q, idIncrements, createCard };
+//.includes(inputValue)

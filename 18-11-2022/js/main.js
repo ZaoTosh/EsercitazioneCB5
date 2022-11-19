@@ -2,7 +2,7 @@ import { GET, POST, PATCH } from "./api.js";
 import { q, createCard, idIncrements } from "./utils.js";
 
 const ul = q(".card");
-
+const searchPoke = document.querySelector(".searchPoke");
 // form insert poke
 const form = document.forms.pokemon;
 const elements = form.elements;
@@ -40,5 +40,5 @@ form.addEventListener("submit", (e) => {
 });
 
 window.onload = GET(url).then((res) =>
-  res.map((pkm) => createCard(url, ul, pkm?.name, pkm?.type, pkm?.id))
+  res.map((pkm) => createCard(url, ul, pkm))
 );
