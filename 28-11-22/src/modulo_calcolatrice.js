@@ -68,4 +68,14 @@ const div = (a, b) => {
   return 0;
 };
 
-module.exports = { sum, sub, mult, div };
+const mod = (a, b) => {
+  if (validationSubDiv(a, b)) {
+    if (dividerValidation(b)) {
+      return a % b;
+    }
+    return -1;
+  }
+  return 0;
+};
+
+module.exports = { sum, sub, mult, div, mod };

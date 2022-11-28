@@ -15,36 +15,6 @@ app.get("/calc", function (req, res) {
   res.sendFile("calcolatrice.html", { root: __dirname + "/src/resources" });
 });
 
-let operation = "";
-//--------SUM----------
-switch (operation) {
-  //--------SUB----------
-  case "radio_sub":
-    let p1 = req.query.param1;
-    let p2 = req.query.param2;
-    const result = mod_calc.sub(p1, p2);
-    console.log("risultato: " + result);
-    res.status(200).send(result + "");
-    break;
-
-  //--------MULT----------
-  case "radio_mult":
-    p1 = req.query.param1;
-    p2 = req.query.param2;
-    result = mod_calc.mult(p1, p2);
-    console.log("risultato: " + result);
-    res.status(200).send(result + "");
-    break;
-
-  //--------DIV----------
-  case "radio_div":
-    p1 = req.query.param1;
-    p2 = req.query.param2;
-    result = mod_calc.div(p1, p2);
-    console.log("risultato: " + result);
-    res.status(200).send(result + "");
-    break;
-}
 app.get("/sum", function (req, res) {
   let p1 = req.query.param1;
   let p2 = req.query.param2;
@@ -73,6 +43,14 @@ app.get("/div", function (req, res) {
   let p1 = req.query.param1;
   let p2 = req.query.param2;
   const result = mod_calc.div(p1, p2);
+  console.log("risultato: " + result);
+  res.status(200).send(result + "");
+});
+
+app.get("/mod", function (req, res) {
+  let p1 = req.query.param1;
+  let p2 = req.query.param2;
+  const result = mod_calc.mod(p1, p2);
   console.log("risultato: " + result);
   res.status(200).send(result + "");
 });

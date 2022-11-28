@@ -32,6 +32,8 @@ if (btnEqual)
       url = `http://localhost:3000/mult?param1=${par1}&param2=${par2}`;
     else if (formElement.operator.value == "/")
       url = `http://localhost:3000/div?param1=${par1}&param2=${par2}`;
+    else if (formElement.operator.value == "%")
+      url = `http://localhost:3000/mod?param1=${par1}&param2=${par2}`;
     else url = `http://localhost:3000/sum?param1=${par1}&param2=${par2}`;
     console.log(url);
     GET(url, options);
