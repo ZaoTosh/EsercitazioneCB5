@@ -1,6 +1,5 @@
 const validationSumMult = (...num) => {
   for (let iterator of num) {
-    console.log("controllo: " + iterator);
     if (isNaN(parseInt(iterator))) return false;
   }
   return true;
@@ -40,14 +39,19 @@ const sum = (...num) => {
     }
     return -1;
   }
-  return 0;
+  return -2;
 };
 
 const sub = (a, b) => {
-  console.log(a, b);
-  if (validationSubDiv(a, b)) return a - b;
-  return `Sono presenti valori non validi`;
+  if (validationSubDiv(a, b)) {
+    if (validationSubDiv(a, b)) {
+      return a - b;
+    }
+    return -1;
+  }
+  return -2;
 };
+
 const mult = (...num) => {
   if (num.length >= 2) {
     if (validationSumMult(...num)) {
@@ -55,7 +59,7 @@ const mult = (...num) => {
     }
     return -1;
   }
-  return 0;
+  return -2;
 };
 
 const div = (a, b) => {
@@ -65,7 +69,7 @@ const div = (a, b) => {
     }
     return -1;
   }
-  return 0;
+  return -2;
 };
 
 const mod = (a, b) => {
@@ -75,7 +79,7 @@ const mod = (a, b) => {
     }
     return -1;
   }
-  return 0;
+  return -2;
 };
 
 module.exports = { sum, sub, mult, div, mod };
