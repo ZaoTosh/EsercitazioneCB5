@@ -1,0 +1,38 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a7a9f2;
+}
+.userCard {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(31, 109, 198);
+  justify-content: center;
+  align-items: center;
+  background-color: #6e72e4;
+  border-radius: 10px;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a7a9f2;
+
+  .post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid rgb(31, 109, 198);
+
+    background-color: #6e72e4;
+    width: 400px;
+    height: 40px;
+    cursor: pointer;
+  }
+}

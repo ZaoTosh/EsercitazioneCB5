@@ -1,18 +1,102 @@
 .main {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 250px;
-  height: 150px;
-  border: 1px solid red;
+  height: 100%;
+  width: 100%;
+  background-color: #a7a9f2;
   .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+}
+.main__single_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #a7a9f2;
+  .card {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    font-size: 1.4em;
+    border: 2px solid rgb(31, 109, 198);
+    height: 200px;
+    width: 300px;
+    border-radius: 10px;
+    background-color: #6e72e4;
+  }
+}
 
-    gap: 2px;
+.main__single_post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #a7a9f2;
+  .main__container {
+    width: 600px;
+    .post_title_id {
+      display: flex;
+
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .post_body {
+    }
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px dotted #fff;
+  border-style: solid solid dotted dotted;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px dotted #ff3d00;
+  border-style: solid solid dotted;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  animation: rotationBack 1s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
   }
 }

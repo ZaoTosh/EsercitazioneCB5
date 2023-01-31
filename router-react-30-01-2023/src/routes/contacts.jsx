@@ -1,25 +1,25 @@
 import styles from "./styles.module.scss";
 import { useState, useEffect } from "react";
-
+import UserCard from "./../Components/UserCard";
+import { GET } from "../utils/http";
 export default function Contact() {
-  const [dateUser, setDateUser] = useState([]);
+  const [userDate, setUserDate] = useState([]);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/users`)
       .then((res) => res.json())
-      .then((data) => setDateUser(data.users));
+      .then((date) => setUserDate(date.users));
   }, []);
 
   return (
     <div>
-      {dateUser.map((data) => (
-        <div className={styles.main}>
-          <div className={styles.container}>
-            <p>{data.lastName}</p>
-            <h2> {data.firstName} </h2>
-          </div>
+      <div className={styles.main}>
+        <div className={styles.container}>
+          {userDate.map((date, index) => (
+            <UserCard userDate={date} key={date.id} />
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
