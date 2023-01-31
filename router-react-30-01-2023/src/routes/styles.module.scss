@@ -2,14 +2,15 @@
   display: flex;
   height: 100%;
   width: 100%;
+
   background-color: #a7a9f2;
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: 5px;
   }
 }
 .main__single_card {
@@ -41,7 +42,7 @@
   width: 100vw;
   background-color: #a7a9f2;
   .main__container {
-    width: 600px;
+    width: 800px;
     .post_title_id {
       display: flex;
 
